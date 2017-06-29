@@ -24,11 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NumActivity"
+        <activity
+            android:name=".NumActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateVisible">
-
-        </activity>
+            android:windowSoftInputMode="stateVisible"></activity>
+        <activity android:name=".DBActivity"></activity>
     </application>
 
 </manifest>

@@ -2,8 +2,12 @@ package ru.devhead.gfzuchet;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,8 +24,18 @@ import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import static ru.devhead.gfzuchet.Constants.FIRST_COLUMN;
@@ -42,9 +56,8 @@ public class MainActivity extends Activity {
     private CleanableEditText search;
     private  int lastPoss;
     private  Switch mode;
-
-
-
+    String cur_db;
+    private  SharedPreferences sPref;
 
 
     @Override
@@ -53,12 +66,31 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
+
+        sPref = getSharedPreferences("MAIN", MODE_PRIVATE);
+        cur_db = sPref.getString("DB", "");
+
+        DatabaseHelper.cur_db = cur_db;
+        Log.d("+++++++++++",cur_db);
+        if (cur_db==""){
+            Log.d("++++++++++","hi");
+            DatabaseHelper.cur_db="test.db";
+        }
+
+
         db = new DatabaseHelper(this);
         try {
             db.openDataBase();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+
+
+
+        }
+
+
 
         final ImageButton settings = (ImageButton) findViewById(R.id.settings);
 
@@ -75,6 +107,36 @@ public class MainActivity extends Activity {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         Toast.makeText(getApplicationContext(), "You have clicked " + menuItem.getTitle(), Toast.LENGTH_LONG).show();
+                        if (menuItem.getTitle().equals("Открыть БД")){
+                            Intent intent = new Intent(MainActivity.this, DBActivity.class);
+                            startActivity(intent);
+
+                        }
+                        if (menuItem.getTitle().equals("Новая БД")){
+                            File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
+                            File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+
+                                    new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
+                                    +".db");
+                            try {
+                                copy(src,dst);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            SharedPreferences.Editor ed = sPref.edit();
+                            ed.putString("DB", new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString() +".db");
+                            ed.commit();
+
+                            //db.cur_db=new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
+                            //        +".db";
+
+
+                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finishAffinity();
+
+
+                        }
+
                         return true;
                     }
                 });
@@ -124,6 +186,9 @@ public class MainActivity extends Activity {
 
 
         search = (CleanableEditText) findViewById(R.id.search);
+
+
+        //search.setHint(cur_db);
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -153,7 +218,11 @@ public class MainActivity extends Activity {
                 int pos = position + 1;
 
                 lastPoss =  pos-5;
-                Toast.makeText(MainActivity.this, Integer.toString(pos) + " Clicked", Toast.LENGTH_SHORT).show();
+
+
+
+                
+                //Toast.makeText(MainActivity.this, " Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NumActivity.class);
                 intent.putExtra("article", arrArticle.get(pos-1));
                 intent.putExtra("title", arrTitle.get(pos-1));
@@ -192,9 +261,32 @@ public class MainActivity extends Activity {
 
     }
 
+    public static void copy(File sourceFile, File destFile) throws IOException {
+        if (!destFile.getParentFile().exists())
+            destFile.getParentFile().mkdirs();
 
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
 
-    @Override
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        try {
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } finally {
+            if (source != null) {
+                source.close();
+            }
+            if (destination != null) {
+                destination.close();
+            }
+        }
+    }
+
+        @Override
     protected void onResume() {
         super.onResume();
         SearcByText();

@@ -4,15 +4,25 @@
     <item
         android:id="@+id/dropdown_menu1"
         android:showAsAction="ifRoom"
-        android:title="Обновить номенклатуру"
+        android:title="Новая БД"
         android:visible="true" />
     <item
         android:id="@+id/dropdown_menu2"
+        android:showAsAction="ifRoom"
+        android:title="Открыть БД"
+        android:visible="true" />
+    <item
+        android:id="@+id/dropdown_menu3"
         android:showAsAction="ifRoom|withText"
         android:title="Выгрузить отчёт"
         android:visible="true" />
     <item
-        android:id="@+id/dropdown_menu3"
+        android:id="@+id/dropdown_menu4"
+        android:showAsAction="ifRoom|withText"
+        android:title="Обновить номенклатуру"
+        android:visible="true" />
+    <item
+        android:id="@+id/dropdown_menu5"
         android:showAsAction="ifRoom"
         android:title="Настройки"
         android:visible="true" />

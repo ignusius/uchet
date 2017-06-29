@@ -1,6 +1,7 @@
 package ru.devhead.gfzuchet;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 public class NumActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
+    private String cur_db;
 
 
     @Override
@@ -29,6 +31,9 @@ public class NumActivity extends AppCompatActivity {
         final String article = b.getString("article");
         final int sum_v = b.getInt("sum");
         final String note_v = b.getString("note");
+
+        SharedPreferences sPref = getSharedPreferences("MAIN",MODE_PRIVATE);
+        cur_db = sPref.getString("DB", "").toString();
 
         db = new DatabaseHelper(this);
         try {

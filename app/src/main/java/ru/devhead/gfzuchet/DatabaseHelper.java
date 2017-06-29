@@ -2,6 +2,7 @@ package ru.devhead.gfzuchet;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,10 +15,14 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public static  String CURDB ;
+    private SharedPreferences mSettings;
 
-    private static final int DATABASE_VERSION = 3;
-    private static final String DATABASE_NAME = "subject";
-    private static String DB_PATH = Environment.getExternalStorageDirectory() + "/GFZ/gfzdata";
+
+    private  static int DATABASE_VERSION = 3;
+    private static String DATABASE_NAME = "subject";
+    public static  String cur_db;
+    private  String DB_PATH = Environment.getExternalStorageDirectory() + "/GFZ/DB/";
     private static SQLiteDatabase myDataBase;
 
 
@@ -27,7 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
 
     }
 
@@ -44,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
         try {
 
-            myDataBase = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+            myDataBase = SQLiteDatabase.openDatabase(DB_PATH+cur_db, null, SQLiteDatabase.OPEN_READWRITE);
         } catch (Exception e) {
 
 
@@ -73,6 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sum.add(data.getString(data.getColumnIndex("sum")));
 
         }
+        data.close();
 
         total.add(article);
         total.add(title);
@@ -114,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sum.add(data.getString(data.getColumnIndex("sum")));
             id.add(data.getLong(data.getColumnIndex("_id")));
         }
+        data.close();
 
         total.add(article);
         total.add(title);
