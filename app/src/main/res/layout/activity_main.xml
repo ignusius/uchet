@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.devhead.gfzuchet.MainActivity">
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <ru.devhead.gfzuchet.CleanableEditText
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="0.30"
+                android:autoText="false"
+                android:drawableRight="@android:drawable/ic_menu_close_clear_cancel"
+                android:ems="10"
+                android:hint="Поиск" />
+
+            <Switch
+                android:id="@+id/mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.04" />
+
+            <ImageButton
+                android:id="@+id/settings"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05"
+                android:background="@android:color/background_light"
+                android:elevation="0dp"
+                android:src="@android:drawable/ic_input_get"
+                tools:background="@android:color/background_light" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/listView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                tools:layout_editor_absoluteX="8dp"
+                android:choiceMode="singleChoice"
+                android:transcriptMode="normal"
+                tools:layout_editor_absoluteY="0dp"></ListView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
