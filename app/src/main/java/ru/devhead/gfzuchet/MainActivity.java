@@ -77,6 +77,19 @@ public class MainActivity extends Activity {
 
         File file_chck = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+cur_db);
         if(!file_chck.exists()) {
+
+            CreateDir("/GFZ");
+            CreateDir("/GFZ/Teplate");
+            CreateDir("/GFZ/Reports");
+            CreateDir("/GFZ/DB");
+
+            File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/test.db");
+            File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/test.db");
+            try {
+                copy(src,dst);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             cur_db = "test.db";
 
         }
@@ -344,7 +357,18 @@ public class MainActivity extends Activity {
     }
 
 
-
+    private void CreateDir(String path){
+        File folder = new File(Environment.getExternalStorageDirectory()+ path);
+        boolean success = true;
+        if (!folder.exists()) {
+            success = folder.mkdir();
+        }
+        if (success) {
+            Toast.makeText(getApplicationContext(), "Успешное создание директории: "+path, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Ошибка создания директории" + path, Toast.LENGTH_LONG).show();
+        }
+    }
 
 
 
@@ -356,8 +380,8 @@ public class MainActivity extends Activity {
 
 
 
-
-
     }
 }
+
+
 
