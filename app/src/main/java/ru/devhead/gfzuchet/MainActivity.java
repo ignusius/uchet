@@ -74,6 +74,14 @@ public class MainActivity extends Activity {
         sPref = getSharedPreferences("MAIN", MODE_PRIVATE);
         cur_db = sPref.getString("DB", "");
 
+
+        File file_chck = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+cur_db);
+        if(!file_chck.exists()) {
+            cur_db = "test.db";
+
+        }
+
+
         DatabaseHelper.cur_db = cur_db;
         Log.d("+++++++++++",cur_db);
         if (cur_db==""){
@@ -115,7 +123,7 @@ public class MainActivity extends Activity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(getApplicationContext(), "You have clicked " + menuItem.getTitle(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "You have clicked " + menuItem.getTitle(), Toast.LENGTH_LONG).show();
                         if (menuItem.getTitle().equals("Открыть базу")){
                             Intent intent = new Intent(MainActivity.this, DBActivity.class);
                             startActivity(intent);
@@ -163,10 +171,10 @@ public class MainActivity extends Activity {
                         }
                         if (menuItem.getTitle().equals("Выгрузить отчёт")) {
 
-                            Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
                             try {
                                 db.exportCSV();
                             } catch (IOException e) {
+                                Toast.makeText(getApplicationContext(), "Ошибка выгрузки", Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
                             String fileName = Environment.getExternalStorageDirectory() + "/GFZ/Reports/template.csv";
@@ -334,6 +342,11 @@ public class MainActivity extends Activity {
             }
         }
     }
+
+
+
+
+
 
         @Override
     protected void onResume() {

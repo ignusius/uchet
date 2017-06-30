@@ -60,6 +60,7 @@ public class SettindsActivity extends AppCompatActivity {
 
                 ed.commit();
                 Toast.makeText(getApplicationContext(), "Сохранено", Toast.LENGTH_LONG).show();
+                finish();
 
                 break;
         }

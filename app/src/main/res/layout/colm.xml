@@ -16,7 +16,8 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:gravity="left"
+        android:paddingLeft="30dp" />
 
     <TextView
         android:id="@+id/age"
@@ -29,7 +30,8 @@
         android:id="@+id/status"
         android:layout_width="1dp"
         android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="right"
+        android:paddingRight="20dp" />
 
 </LinearLayout>

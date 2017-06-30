@@ -48,8 +48,6 @@ public class NumActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(article);
 
-        final TextView artcl = (TextView) findViewById(R.id.article);
-        artcl.setText(article);
         final TextView head = (TextView) findViewById(R.id.title);
         head.setText(title);
         final TextView history = (TextView) findViewById(R.id.history);
