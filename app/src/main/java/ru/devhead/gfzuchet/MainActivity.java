@@ -1,11 +1,14 @@
 package ru.devhead.gfzuchet;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -22,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -91,6 +95,11 @@ public class MainActivity extends Activity {
         }
 
 
+        final TextView textCurDB = (TextView) findViewById(R.id.textСurDB);
+        textCurDB.setText(cur_db);
+
+
+
 
         final ImageButton settings = (ImageButton) findViewById(R.id.settings);
 
@@ -107,35 +116,75 @@ public class MainActivity extends Activity {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         Toast.makeText(getApplicationContext(), "You have clicked " + menuItem.getTitle(), Toast.LENGTH_LONG).show();
-                        if (menuItem.getTitle().equals("Открыть БД")){
+                        if (menuItem.getTitle().equals("Открыть базу")){
                             Intent intent = new Intent(MainActivity.this, DBActivity.class);
                             startActivity(intent);
 
                         }
-                        if (menuItem.getTitle().equals("Новая БД")){
-                            File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
-                            File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+
-                                    new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
-                                    +".db");
-                            try {
-                                copy(src,dst);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            SharedPreferences.Editor ed = sPref.edit();
-                            ed.putString("DB", new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString() +".db");
-                            ed.commit();
+                        if (menuItem.getTitle().equals("Создать базу")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("Вы уверенны, что хотитете создать новую баззу данных?");
 
-                            //db.cur_db=new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
-                            //        +".db";
+                            builder.setPositiveButton("Создать", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User clicked OK button
+                                    File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
+                                    File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+
+                                            new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
+                                            +".db");
+                                    try {
+                                        copy(src,dst);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    SharedPreferences.Editor ed = sPref.edit();
+                                    ed.putString("DB", new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString() +".db");
+                                    ed.commit();
 
 
-                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finishAffinity();
+                                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+
+
+                                }
+                            });
+                            builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User cancelled the dialog
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
 
 
                         }
+                        if (menuItem.getTitle().equals("Выгрузить отчёт")) {
+
+                            Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
+                            try {
+                                db.exportCSV();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            String fileName = Environment.getExternalStorageDirectory() + "/GFZ/Reports/template.csv";
+                            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            emailIntent.setType("*/*");
+                            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {sPref.getString("email", "")});
+                            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Отчёт");
+                            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(fileName)));
+                            startActivity(Intent.createChooser(emailIntent, "Отправить отчёт"));
+
+                        }
+                        if (menuItem.getTitle().equals("Настройки")) {
+                            Intent intent = new Intent(MainActivity.this, SettindsActivity.class);
+                            startActivity(intent);
+                        }
+
+
+
 
                         return true;
                     }
@@ -150,8 +199,11 @@ public class MainActivity extends Activity {
                                             @Override
                                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+
                                                 SearcByText();
                                                 listView.setSelection(lastPoss);
+                                                listView.setAdapter(adapter);
+
 
                                             }
                                         });
@@ -219,9 +271,6 @@ public class MainActivity extends Activity {
 
                 lastPoss =  pos-5;
 
-
-
-                
                 //Toast.makeText(MainActivity.this, " Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NumActivity.class);
                 intent.putExtra("article", arrArticle.get(pos-1));

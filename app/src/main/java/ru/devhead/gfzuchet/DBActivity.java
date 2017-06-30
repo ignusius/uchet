@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,18 @@ public class DBActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_db);
+        getSupportActionBar().setTitle("Выбор базы");
 
+
+        TextView textCurDB = (TextView) findViewById(R.id.textСurDB);
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        textCurDB.setText(DatabaseHelper.cur_db);
 
         ListView lvMain = (ListView) findViewById(R.id.listDB);
 

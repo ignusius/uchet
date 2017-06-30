@@ -4,12 +4,12 @@
     <item
         android:id="@+id/dropdown_menu1"
         android:showAsAction="ifRoom"
-        android:title="Новая БД"
+        android:title="Создать базу"
         android:visible="true" />
     <item
         android:id="@+id/dropdown_menu2"
         android:showAsAction="ifRoom"
-        android:title="Открыть БД"
+        android:title="Открыть базу"
         android:visible="true" />
     <item
         android:id="@+id/dropdown_menu3"

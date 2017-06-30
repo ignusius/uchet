@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static String query;
 
     private Cursor data;
+    private FileOutputStream outputStream;
 
 
     public DatabaseHelper(Context context) {
@@ -131,6 +136,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return total;
     }
+
+
+    public  void exportCSV() throws IOException {
+
+        File file = new File(Environment.getExternalStorageDirectory() + "/GFZ/Reports/template.csv");
+
+        try {
+            outputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ArrayList<ArrayList> total = new ArrayList<ArrayList>();
+        ArrayList<String> article = new ArrayList<String>();
+        ArrayList<String> title = new ArrayList<String>();
+        ArrayList<String> note = new ArrayList<String>();
+        ArrayList<String> sum = new ArrayList<String>();
+
+
+        query = "select rowid as _id, article, title, note, sum from data ";
+        Log.d("++++++++", query);
+
+        data = myDataBase.rawQuery(query, null);
+
+
+        while (data.moveToNext()) {
+
+            try {
+                outputStream.write(data.getString(data.getColumnIndex("article")).getBytes("Cp1251"));
+                outputStream.write(";".getBytes());
+                outputStream.write(data.getString(data.getColumnIndex("title")).getBytes("Cp1251" ));
+                outputStream.write(";".getBytes());
+                outputStream.write(data.getString(data.getColumnIndex("note")).getBytes("Cp1251"));
+                outputStream.write(";".getBytes());
+                outputStream.write(data.getString(data.getColumnIndex("sum")).getBytes("Cp1251"));
+                outputStream.write("\n".getBytes());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        data.close();
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public  void UpdateTable(String num, String value) {
 
