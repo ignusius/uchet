@@ -4,34 +4,38 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/colm_article"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:background="@android:color/background_light"
         android:gravity="center"
+        android:textAlignment="viewEnd"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/gender"
-        android:layout_width="100dp"
+        android:id="@+id/colm_name"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:gravity="left"
-        android:paddingLeft="30dp" />
+        android:gravity="left|center"
+        android:paddingLeft="30dp"
+        android:textAlignment="textStart" />
 
     <TextView
-        android:id="@+id/age"
+        android:id="@+id/colm_note"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/status"
-        android:layout_width="1dp"
+        android:id="@+id/colm_sum"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_weight="1"
-        android:gravity="right"
-        android:paddingRight="20dp" />
+        android:gravity="right|center"
+        android:minEms="3"
+        android:paddingRight="20dp"
+
+        android:textAlignment="textEnd" />
 
 </LinearLayout>

@@ -140,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public  void exportCSV() throws IOException {
 
-        File file = new File(Environment.getExternalStorageDirectory() + "/GFZ/Reports/template.csv");
+        File file = new File(Environment.getExternalStorageDirectory() + "/GFZ/Reports/Отчёт_"+cur_db.substring(0, cur_db.length() - 3)+".csv");
 
         try {
             outputStream = new FileOutputStream(file);
@@ -154,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> sum = new ArrayList<String>();
 
 
-        query = "select rowid as _id, article, title, note, sum from data ";
+        query = "select rowid as _id, article, title, note, sum from data where sum > 0 ";
         Log.d("++++++++", query);
 
         data = myDataBase.rawQuery(query, null);

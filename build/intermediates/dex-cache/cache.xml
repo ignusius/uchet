@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="376450c560204ee465462b17ea468a079d004063">
+        sha1="39a2cc6f9a5ed3a005fccd46d1784a8ce6a23b4d">
         <dex dex="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_85767840cd2262f88ddf6890287363fe273bc9b3/classes.dex" />
     </item>
 

@@ -2,25 +2,25 @@ package ru.devhead.gfzuchet;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteCantOpenDatabaseException;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import static ru.devhead.gfzuchet.Constants.FIRST_COLUMN;
 import static ru.devhead.gfzuchet.Constants.FOURTH_COLUMN;
@@ -79,9 +79,11 @@ public class MainActivity extends Activity {
         if(!file_chck.exists()) {
 
             CreateDir("/GFZ");
-            CreateDir("/GFZ/Teplate");
+            CreateDir("/GFZ/Template");
             CreateDir("/GFZ/Reports");
             CreateDir("/GFZ/DB");
+
+            copyAssets();
 
             File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/test.db");
             File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/test.db");
@@ -91,15 +93,17 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
             cur_db = "test.db";
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putString("DB", cur_db);
+            ed.commit();
 
         }
 
 
         DatabaseHelper.cur_db = cur_db;
-        Log.d("+++++++++++",cur_db);
         if (cur_db==""){
-            Log.d("++++++++++","hi");
-            DatabaseHelper.cur_db="test.db";
+
+            DatabaseHelper.cur_db= "test.db";
         }
 
 
@@ -144,7 +148,7 @@ public class MainActivity extends Activity {
                         }
                         if (menuItem.getTitle().equals("Создать базу")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setMessage("Вы уверенны, что хотитете создать новую баззу данных?");
+                            builder.setMessage("Вы уверенны, что хотитете создать новую базу данных?");
 
                             builder.setPositiveButton("Создать", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -190,7 +194,7 @@ public class MainActivity extends Activity {
                                 Toast.makeText(getApplicationContext(), "Ошибка выгрузки", Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
-                            String fileName = Environment.getExternalStorageDirectory() + "/GFZ/Reports/template.csv";
+                            String fileName = Environment.getExternalStorageDirectory() +  "/GFZ/Reports/Отчёт_"+cur_db.substring(0, cur_db.length() - 3)+".csv";
                             Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                             emailIntent.setType("*/*");
                             emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {sPref.getString("email", "")});
@@ -198,6 +202,19 @@ public class MainActivity extends Activity {
                             emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(fileName)));
                             startActivity(Intent.createChooser(emailIntent, "Отправить отчёт"));
 
+                        }
+
+                        if (menuItem.getTitle().equals("Обновить номенклатуру")){
+
+                            Boolean result=isDownloadManagerAvailable(getApplicationContext());
+                            if (result){
+                                try {
+                                    downloadNum();
+                                }
+                                catch (Exception e){
+                                    Toast.makeText(getApplicationContext(), "Укажите в настройках корректный адрес для загрузки", Toast.LENGTH_LONG).show();
+                                }
+                            }
                         }
                         if (menuItem.getTitle().equals("Настройки")) {
                             Intent intent = new Intent(MainActivity.this, SettindsActivity.class);
@@ -236,10 +253,21 @@ public class MainActivity extends Activity {
 
         list = new ArrayList<HashMap<String, String>>();
 
-        arrArticle = (ArrayList<String>) db.getTable().get(0);
-        arrTitle = (ArrayList<String>) db.getTable().get(1);
-        arrNote = (ArrayList<String>) db.getTable().get(2);
-        arrSum = (ArrayList<String>) db.getTable().get(3);
+        try {
+
+            arrArticle = (ArrayList<String>) db.getTable().get(0);
+            arrTitle = (ArrayList<String>) db.getTable().get(1);
+            arrNote = (ArrayList<String>) db.getTable().get(2);
+            arrSum = (ArrayList<String>) db.getTable().get(3);
+        }
+        catch (Exception e){
+            File file_template = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+cur_db);
+            file_template.delete();
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+
+
+        }
 
 
         for (int x = 0; x < arrArticle.size(); x++) {
@@ -248,7 +276,7 @@ public class MainActivity extends Activity {
 
             temp.put(FIRST_COLUMN, arrArticle.get(x));
             temp.put(SECOND_COLUMN, arrTitle.get(x));
-            temp.put(THIRD_COLUMN, arrNote.get(x));
+            //temp.put(THIRD_COLUMN, arrNote.get(x));
             temp.put(FOURTH_COLUMN, arrSum.get(x));
             list.add(temp);
             //temp.clear();
@@ -320,7 +348,7 @@ public class MainActivity extends Activity {
 
             temp.put(FIRST_COLUMN, arrArticle.get(x));
             temp.put(SECOND_COLUMN, arrTitle.get(x));
-            temp.put(THIRD_COLUMN, arrNote.get(x));
+            //temp.put(THIRD_COLUMN, arrNote.get(x));
             temp.put(FOURTH_COLUMN, arrSum.get(x));
             list.add(temp);
             listView.setAdapter(adapter);
@@ -356,6 +384,51 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void copyFileStream(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
+    private void copyAssets() {
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("2");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        if (files != null) for (String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+                File outFile = new File(Environment.getExternalStorageDirectory()+"/GFZ/Template/", filename);
+                out = new FileOutputStream(outFile);
+                copyFileStream(in, out);
+            } catch (IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+            }
+        }
+    }
+
 
     private void CreateDir(String path){
         File folder = new File(Environment.getExternalStorageDirectory()+ path);
@@ -367,6 +440,67 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Успешное создание директории: "+path, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getApplicationContext(), "Ошибка создания директории" + path, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void downloadNum(){
+
+        File file_template = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
+        file_template.delete();
+        String DownloadUrl = sPref.getString("server", "");
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(DownloadUrl));
+        //request.setDescription("sample pdf file for testing");   //appears the same in Notification bar while downloading
+        request.setTitle("Обновление номенклатуры");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        }
+        request.setDestinationInExternalPublicDir("/GFZ/Template/", "template.db");
+        DownloadManager.Query query = new DownloadManager.Query();
+        if(query!=null) {
+            query.setFilterByStatus(DownloadManager.STATUS_FAILED|DownloadManager.STATUS_PAUSED|DownloadManager.STATUS_SUCCESSFUL|
+                    DownloadManager.STATUS_RUNNING|DownloadManager.STATUS_PENDING);
+        } else {
+            return;
+        }
+        // get download service and enqueue file
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Cursor c = manager.query(query);
+        manager.enqueue(request);
+        if(c.moveToFirst()) {
+            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+            switch (status) {
+                case DownloadManager.STATUS_PAUSED:
+                    Toast.makeText(getApplicationContext(), "Не могу обновить, включите интернет", Toast.LENGTH_LONG).show();
+                    break;
+                case DownloadManager.STATUS_PENDING:
+                    break;
+                case DownloadManager.STATUS_RUNNING:
+                    break;
+                case DownloadManager.STATUS_SUCCESSFUL:
+                    Toast.makeText(getApplicationContext(), "Номенклатура успешно обнавлена", Toast.LENGTH_LONG).show();
+                    break;
+                case DownloadManager.STATUS_FAILED:
+                    Toast.makeText(getApplicationContext(), "Не могу обновить, включите интернет", Toast.LENGTH_LONG).show();
+                    break;
+            }
+
+        }
+    }
+
+    public static boolean isDownloadManagerAvailable(Context context) {
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+                return false;
+            }
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setClassName("com.android.providers.downloads.ui","com.android.providers.downloads.ui.DownloadList");
+            List list = context.getPackageManager().queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY);
+            return list.size() > 0;
+        } catch (Exception e) {
+            return false;
         }
     }
 

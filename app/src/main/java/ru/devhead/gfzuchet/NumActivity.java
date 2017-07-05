@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class NumActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private String cur_db;
+    private boolean validate;
 
 
     @Override
@@ -63,20 +65,59 @@ public class NumActivity extends AppCompatActivity {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            int summa = sum_v + Integer.parseInt(editAddSum.getText().toString());
-                            db.UpdateTable(article, String.valueOf(summa));
+                            if(validate) {
+                                int summa = sum_v + Integer.parseInt(editAddSum.getText().toString());
+                                db.UpdateTable(article, String.valueOf(summa));
 
-                            String note = note_v + " + " + editAddSum.getText().toString();
-                            db.UpdateNote(article, note);
+                                String note = note_v + " + " + editAddSum.getText().toString();
+                                db.UpdateNote(article, note);
 
 
-                            finish();
+                                finish();
+                            }
                             return true;
                         default:
                             break;
                     }
                 }
                 return false;
+            }
+        });
+
+        editAddSum.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                validate=true;
+                try {
+                    if ((Integer.parseInt(editAddSum.getText().toString()) > 100)) {
+                        if(editAddSum.getText().toString().trim().length() != 0) {
+                            editAddSum.setError("Слишком большое значене > 100");
+                        }
+                        validate = false;
+                    }
+
+                }
+                catch (Exception e){
+                    if(editAddSum.getText().toString().trim().length() != 0) {
+                        editAddSum.setError("Некорректное значение");
+                    }
+                    validate=false;
+
+                    }
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
