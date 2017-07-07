@@ -207,7 +207,7 @@ public class MainActivity extends Activity {
                         if (menuItem.getTitle().equals("Обновить номенклатуру")){
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setMessage("Вы уверенны, что хотитете обновить номенклатуру? Перед скачиванием теущая номенклатура будет удалена!");
+                            builder.setMessage("Вы уверенны, что хотите обновить номенклатуру? Перед скачиванием теущая номенклатура будет удалена!");
 
                             builder.setPositiveButton("Обновить", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
