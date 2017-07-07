@@ -206,15 +206,35 @@ public class MainActivity extends Activity {
 
                         if (menuItem.getTitle().equals("Обновить номенклатуру")){
 
-                            Boolean result=isDownloadManagerAvailable(getApplicationContext());
-                            if (result){
-                                try {
-                                    downloadNum();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("Вы уверенны, что хотитете обновить номенклатуру? Перед скачиванием теущая номенклатура будет стёрта!");
+
+                            builder.setPositiveButton("Обновить", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Boolean result=isDownloadManagerAvailable(getApplicationContext());
+                                    if (result){
+                                        try {
+                                            downloadNum();
+                                        }
+                                        catch (Exception e){
+                                            Toast.makeText(getApplicationContext(), "Укажите в настройках корректный адрес для загрузки", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
+
                                 }
-                                catch (Exception e){
-                                    Toast.makeText(getApplicationContext(), "Укажите в настройках корректный адрес для загрузки", Toast.LENGTH_LONG).show();
+                            });
+                            builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User cancelled the dialog
+                                    dialog.dismiss();
                                 }
-                            }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+
+
                         }
                         if (menuItem.getTitle().equals("Настройки")) {
                             Intent intent = new Intent(MainActivity.this, SettindsActivity.class);
