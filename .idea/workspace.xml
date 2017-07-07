@@ -19,16 +19,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5767eef-64ab-4d91-91c2-7e91a496fde2" name="Default" comment="First commit">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java" />
     </list>
     <ignored path="GFZUCHET.iws" />
@@ -64,11 +54,11 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="211" column="63" selection-start-line="211" selection-start-column="63" selection-end-line="211" selection-end-column="63" />
+            <state relative-caret-position="245">
+              <caret line="209" column="148" selection-start-line="209" selection-start-column="148" selection-end-line="209" selection-end-column="148" />
               <folding>
-                <element signature="method#beforeTextChanged#0;class#12045:12451" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#12045:12451" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#12046:12452" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#12046:12452" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2672,8 +2662,8 @@
         <state relative-caret-position="1080">
           <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#12045:12451" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#12045:12451" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#12046:12452" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#12046:12452" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2751,8 +2741,8 @@
         <state relative-caret-position="180">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#12045:12451" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#12045:12451" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#12046:12452" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#12046:12452" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3022,11 +3012,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="211" column="63" selection-start-line="211" selection-start-column="63" selection-end-line="211" selection-end-column="63" />
+        <state relative-caret-position="245">
+          <caret line="209" column="148" selection-start-line="209" selection-start-column="148" selection-end-line="209" selection-end-column="148" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#12045:12451" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#12045:12451" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#12046:12452" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#12046:12452" expanded="false" />
           </folding>
         </state>
       </provider>
