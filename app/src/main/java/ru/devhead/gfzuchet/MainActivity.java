@@ -28,6 +28,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -211,18 +212,14 @@ public class MainActivity extends Activity {
 
                             builder.setPositiveButton("Обновить", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Boolean result=isDownloadManagerAvailable(getApplicationContext());
-                                    if (result){
-                                        try {
-                                            downloadNum();
-                                        }
-                                        catch (Exception e){
-                                            Toast.makeText(getApplicationContext(), "Укажите в настройках корректный адрес для загрузки", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-
+                                    // execute this when the downloader must be fired
+                                    final DownloadTask downloadTask = new DownloadTask(MainActivity.this);
+                                    String DownloadUrl = sPref.getString("server", "");
+                                    downloadTask.execute(DownloadUrl);
 
                                 }
+
+
                             });
                             builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -462,68 +459,6 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Ошибка создания директории" + path, Toast.LENGTH_LONG).show();
         }
     }
-
-    public void downloadNum(){
-
-        File file_template = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
-        file_template.delete();
-        String DownloadUrl = sPref.getString("server", "");
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(DownloadUrl));
-        //request.setDescription("sample pdf file for testing");   //appears the same in Notification bar while downloading
-        request.setTitle("Обновление номенклатуры");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            request.allowScanningByMediaScanner();
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        }
-        request.setDestinationInExternalPublicDir("/GFZ/Template/", "template.db");
-        DownloadManager.Query query = new DownloadManager.Query();
-        if(query!=null) {
-            query.setFilterByStatus(DownloadManager.STATUS_FAILED|DownloadManager.STATUS_PAUSED|DownloadManager.STATUS_SUCCESSFUL|
-                    DownloadManager.STATUS_RUNNING|DownloadManager.STATUS_PENDING);
-        } else {
-            return;
-        }
-        // get download service and enqueue file
-        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Cursor c = manager.query(query);
-        manager.enqueue(request);
-        if(c.moveToFirst()) {
-            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-            switch (status) {
-                case DownloadManager.STATUS_PAUSED:
-                    Toast.makeText(getApplicationContext(), "Не могу обновить, включите интернет", Toast.LENGTH_LONG).show();
-                    break;
-                case DownloadManager.STATUS_PENDING:
-                    break;
-                case DownloadManager.STATUS_RUNNING:
-                    break;
-                case DownloadManager.STATUS_SUCCESSFUL:
-                    Toast.makeText(getApplicationContext(), "Номенклатура успешно обнавлена", Toast.LENGTH_LONG).show();
-                    break;
-                case DownloadManager.STATUS_FAILED:
-                    Toast.makeText(getApplicationContext(), "Не могу обновить, включите интернет", Toast.LENGTH_LONG).show();
-                    break;
-            }
-
-        }
-    }
-
-    public static boolean isDownloadManagerAvailable(Context context) {
-        try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
-                return false;
-            }
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            intent.setClassName("com.android.providers.downloads.ui","com.android.providers.downloads.ui.DownloadList");
-            List list = context.getPackageManager().queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY);
-            return list.size() > 0;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 
 
         @Override
