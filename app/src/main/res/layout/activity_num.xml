@@ -7,11 +7,12 @@
     tools:context="ru.devhead.gfzuchet.NumActivity">
 
     <LinearLayout
-        android:layout_width="344dp"
-        android:layout_height="551dp"
+        android:layout_width="585dp"
+        android:layout_height="810dp"
+        android:layout_marginRight="8dp"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:layout_editor_absoluteX="8dp"
+        app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
@@ -32,20 +33,20 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="10dp"
+            android:weightSum="1"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:weightSum="1">
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Текущее кол-во: "
                     android:textSize="24sp"
                     tools:layout_editor_absoluteX="16dp"
@@ -53,11 +54,38 @@
 
                 <TextView
                     android:id="@+id/SumView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="0"
                     android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="31dp"
+                    tools:text="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textReject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Брак  кол-во: "
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="31dp" />
+
+                <TextView
+                    android:id="@+id/SumRejectView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/colorAccent"
                     android:textSize="24sp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="31dp"
@@ -79,19 +107,34 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="31dp" />
 
-            <EditText
-                android:id="@+id/editAddSum"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="56dp" />
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/editAddSum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.78"
+                    android:ems="10"
+                    android:inputType="phone"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="56dp" />
+
+                <Button
+                    android:id="@+id/bt_reject"
+                    android:layout_width="73dp"
+                    android:layout_height="wrap_content"
+                    android:text="в брак" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.07"
                 android:text="История добавлений"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="31dp" />

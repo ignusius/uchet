@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
     private ArrayList<String> arrTitle;
     private ArrayList<String> arrNote;
     private ArrayList<String> arrSum;
+    private ArrayList<String> arrReject;
     private ListViewAdapter adapter;
     private ListView listView;
     private CleanableEditText search;
@@ -276,6 +277,7 @@ public class MainActivity extends Activity {
             arrTitle = (ArrayList<String>) db.getTable().get(1);
             arrNote = (ArrayList<String>) db.getTable().get(2);
             arrSum = (ArrayList<String>) db.getTable().get(3);
+            arrReject = (ArrayList<String>) db.getTable().get(4);
         }
         catch (Exception e){
             File file_template = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+cur_db);
@@ -343,6 +345,7 @@ public class MainActivity extends Activity {
                 intent.putExtra("title", arrTitle.get(pos-1));
                 intent.putExtra("sum", Integer.valueOf(arrSum.get(pos-1)));
                 intent.putExtra("note", arrNote.get(pos-1));
+                intent.putExtra("reject", Integer.valueOf(arrReject.get(pos-1)));
                 startActivity(intent);
             }
 
@@ -358,6 +361,7 @@ public class MainActivity extends Activity {
         arrTitle = (ArrayList<String>) db.searchTable(String.valueOf(search.getText()),mode.isChecked()).get(1);
         arrNote = (ArrayList<String>) db.searchTable(String.valueOf(search.getText()),mode.isChecked()).get(2);
         arrSum = (ArrayList<String>) db.searchTable(String.valueOf(search.getText()),mode.isChecked()).get(3);
+        arrReject = (ArrayList<String>) db.searchTable(String.valueOf(search.getText()),mode.isChecked()).get(4);
 
         for (int x = 0; x < arrArticle.size(); x++) {
 
