@@ -24,14 +24,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/DatabaseHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/DatabaseHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_num.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_num.xml" />
     </list>
     <ignored path="GFZUCHET.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,11 +62,29 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1830">
-              <caret line="168" column="60" selection-start-line="168" selection-start-column="60" selection-end-line="168" selection-end-column="60" />
+            <state relative-caret-position="150">
+              <caret line="168" column="61" selection-start-line="168" selection-start-column="61" selection-end-line="168" selection-end-column="61" />
               <folding>
-                <element signature="method#beforeTextChanged#0;class#11937:12343" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#11937:12343" expanded="false" />
+                <element signature="e#3700#9928#0" expanded="true" />
+                <element signature="e#4076#9864#0" expanded="true" />
+                <element signature="e#4947#6368#0" expanded="true" />
+                <element signature="e#6367#6368#0" expanded="true" />
+                <element signature="e#6435#6743#0" expanded="true" />
+                <element signature="e#6742#6743#0" expanded="true" />
+                <element signature="e#8476#9020#0" expanded="true" />
+                <element signature="e#9019#9020#0" expanded="true" />
+                <element signature="e#9087#9395#0" expanded="true" />
+                <element signature="e#9394#9395#0" expanded="true" />
+                <element signature="e#9863#9864#0" expanded="true" />
+                <element signature="e#9927#9928#0" expanded="true" />
+                <element signature="e#10023#10557#0" expanded="true" />
+                <element signature="e#10556#10557#0" expanded="true" />
+                <element signature="e#11489#11505#0" expanded="true" />
+                <element signature="method#beforeTextChanged#0;class#11938:12344" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#11938:12344" expanded="false" />
+                <element signature="e#12479#13309#0" expanded="true" />
+                <element signature="e#13308#13309#0" expanded="true" />
+                <element signature="e#14051#14067#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2632,7 +2646,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502348730113</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix bug when creating new database.">
+      <created>1503083462821</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1503083462821</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2649,7 +2670,7 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32666665" sideWeight="0.4976744" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32533333" sideWeight="0.4976744" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2661,7 +2682,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24983388" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32845744" sideWeight="0.5023256" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2717608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2717608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24983388" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2694,7 +2715,8 @@
     <MESSAGE value="First commit" />
     <MESSAGE value="Change download. DownloadManager --&gt; DownloadTask" />
     <MESSAGE value="Add reject" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add reject" />
+    <MESSAGE value="Fix bug when creating new database." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug when creating new database." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2713,8 +2735,26 @@
         <state relative-caret-position="1080">
           <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#11937:12343" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#11937:12343" expanded="false" />
+            <element signature="e#3700#9928#0" expanded="true" />
+            <element signature="e#4076#9864#0" expanded="true" />
+            <element signature="e#4947#6368#0" expanded="true" />
+            <element signature="e#6367#6368#0" expanded="true" />
+            <element signature="e#6435#6743#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#8476#9020#0" expanded="true" />
+            <element signature="e#9019#9020#0" expanded="true" />
+            <element signature="e#9087#9395#0" expanded="true" />
+            <element signature="e#9394#9395#0" expanded="true" />
+            <element signature="e#9863#9864#0" expanded="true" />
+            <element signature="e#9927#9928#0" expanded="true" />
+            <element signature="e#10023#10557#0" expanded="true" />
+            <element signature="e#10556#10557#0" expanded="true" />
+            <element signature="e#11489#11505#0" expanded="true" />
+            <element signature="method#beforeTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="e#12479#13309#0" expanded="true" />
+            <element signature="e#13308#13309#0" expanded="true" />
+            <element signature="e#14051#14067#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2792,8 +2832,26 @@
         <state relative-caret-position="180">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#11937:12343" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#11937:12343" expanded="false" />
+            <element signature="e#3700#9928#0" expanded="true" />
+            <element signature="e#4076#9864#0" expanded="true" />
+            <element signature="e#4947#6368#0" expanded="true" />
+            <element signature="e#6367#6368#0" expanded="true" />
+            <element signature="e#6435#6743#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#8476#9020#0" expanded="true" />
+            <element signature="e#9019#9020#0" expanded="true" />
+            <element signature="e#9087#9395#0" expanded="true" />
+            <element signature="e#9394#9395#0" expanded="true" />
+            <element signature="e#9863#9864#0" expanded="true" />
+            <element signature="e#9927#9928#0" expanded="true" />
+            <element signature="e#10023#10557#0" expanded="true" />
+            <element signature="e#10556#10557#0" expanded="true" />
+            <element signature="e#11489#11505#0" expanded="true" />
+            <element signature="method#beforeTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="e#12479#13309#0" expanded="true" />
+            <element signature="e#13308#13309#0" expanded="true" />
+            <element signature="e#14051#14067#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3068,11 +3126,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ru/devhead/gfzuchet/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1830">
-          <caret line="168" column="60" selection-start-line="168" selection-start-column="60" selection-end-line="168" selection-end-column="60" />
+        <state relative-caret-position="150">
+          <caret line="168" column="61" selection-start-line="168" selection-start-column="61" selection-end-line="168" selection-end-column="61" />
           <folding>
-            <element signature="method#beforeTextChanged#0;class#11937:12343" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#11937:12343" expanded="false" />
+            <element signature="e#3700#9928#0" expanded="true" />
+            <element signature="e#4076#9864#0" expanded="true" />
+            <element signature="e#4947#6368#0" expanded="true" />
+            <element signature="e#6367#6368#0" expanded="true" />
+            <element signature="e#6435#6743#0" expanded="true" />
+            <element signature="e#6742#6743#0" expanded="true" />
+            <element signature="e#8476#9020#0" expanded="true" />
+            <element signature="e#9019#9020#0" expanded="true" />
+            <element signature="e#9087#9395#0" expanded="true" />
+            <element signature="e#9394#9395#0" expanded="true" />
+            <element signature="e#9863#9864#0" expanded="true" />
+            <element signature="e#9927#9928#0" expanded="true" />
+            <element signature="e#10023#10557#0" expanded="true" />
+            <element signature="e#10556#10557#0" expanded="true" />
+            <element signature="e#11489#11505#0" expanded="true" />
+            <element signature="method#beforeTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#11938:12344" expanded="false" />
+            <element signature="e#12479#13309#0" expanded="true" />
+            <element signature="e#13308#13309#0" expanded="true" />
+            <element signature="e#14051#14067#0" expanded="true" />
           </folding>
         </state>
       </provider>

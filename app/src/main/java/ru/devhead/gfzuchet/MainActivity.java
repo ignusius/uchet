@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
                                         e.printStackTrace();
                                     }
                                     SharedPreferences.Editor ed = sPref.edit();
-                                    ed.putString("DB", maked);
+                                    ed.putString("DB", makedb);
                                     ed.commit();
 
 
