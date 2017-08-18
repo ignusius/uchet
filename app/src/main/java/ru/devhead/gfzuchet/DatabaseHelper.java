@@ -70,9 +70,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> title = new ArrayList<String>();
         ArrayList<String> note = new ArrayList<String>();
         ArrayList<String> sum = new ArrayList<String>();
+        ArrayList<String> reject = new ArrayList<String>();
 
 
-        query = "select rowid as _id, article, title, note, sum from data ";
+
+        query = "select rowid as _id, article, title, note, sum, reject from data ";
         Log.d("++++++++", query);
 
         data = myDataBase.rawQuery(query, null);
@@ -83,6 +85,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             title.add(data.getString(data.getColumnIndex("title")));
             note.add(data.getString(data.getColumnIndex("note")));
             sum.add(data.getString(data.getColumnIndex("sum")));
+            reject.add(data.getString(data.getColumnIndex("reject")));
+
 
         }
         data.close();
@@ -91,6 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         total.add(title);
         total.add(note);
         total.add(sum);
+        total.add(reject);
         //total.add(id);
 
         return total;
@@ -104,13 +109,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> title = new ArrayList<String>();
         ArrayList<String> note = new ArrayList<String>();
         ArrayList<String> sum = new ArrayList<String>();
+        ArrayList<String> reject = new ArrayList<String>();
 
 
         if (mode==false) {
-            query = "select rowid as _id, article, title, note, sum from data where title like  ? or article like ? ";
+            query = "select rowid as _id, article, title, note, sum, reject from data where title like  ? or article like ? ";
         }
         else{
-            query = "select rowid as _id, article, title, note, sum from data where (title like  ? or article like ? ) and sum > 0 ";
+            query = "select rowid as _id, article, title, note, sum, reject from data where (title like  ? or article like ? ) and sum != 0 ";
             }
         Log.d("++++++++", query);
 
@@ -126,6 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             note.add(data.getString(data.getColumnIndex("note")));
             sum.add(data.getString(data.getColumnIndex("sum")));
             id.add(data.getLong(data.getColumnIndex("_id")));
+            reject.add(data.getString(data.getColumnIndex("reject")));
         }
         data.close();
 
@@ -133,6 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         total.add(title);
         total.add(note);
         total.add(sum);
+        total.add(reject);
 
         return total;
     }
@@ -152,9 +160,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> title = new ArrayList<String>();
         ArrayList<String> note = new ArrayList<String>();
         ArrayList<String> sum = new ArrayList<String>();
+        ArrayList<String> reject = new ArrayList<String>();
 
 
-        query = "select rowid as _id, article, title, note, sum from data where sum > 0 ";
+        query = "select rowid as _id, article, title, note, sum, reject from data where sum != 0 ";
         Log.d("++++++++", query);
 
         data = myDataBase.rawQuery(query, null);
@@ -168,6 +177,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 outputStream.write(data.getString(data.getColumnIndex("title")).getBytes("Cp1251" ));
                 outputStream.write(";".getBytes());
                 outputStream.write(data.getString(data.getColumnIndex("note")).getBytes("Cp1251"));
+                outputStream.write(";".getBytes());
+                outputStream.write(data.getString(data.getColumnIndex("reject")).getBytes("Cp1251"));
                 outputStream.write(";".getBytes());
                 outputStream.write(data.getString(data.getColumnIndex("sum")).getBytes("Cp1251"));
                 outputStream.write("\n".getBytes());
@@ -197,6 +208,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         data.moveToFirst();
         data.close();
     }
+
+
+    public  void UpdateReject(String num, String value) {
+
+
+        query = "UPDATE data SET reject='"+value+"' WHERE article="+num+"";
+        Log.d("++++++++", query);
+
+        data = myDataBase.rawQuery(query, null);
+        data.moveToFirst();
+        data.close();
+    }
+
 
     public  void UpdateNote(String num, String value) {
 

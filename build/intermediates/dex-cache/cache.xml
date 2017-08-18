@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_15acbaebc9eb5c5ff70ab7c931d040f6fe81c0fa/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="4a48141826333f3e9f7c301376d4fa52c1b6025d">
         <dex dex="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_85767840cd2262f88ddf6890287363fe273bc9b3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/home/komar/AndroidStudioProjects/GFZUCHET/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_15acbaebc9eb5c5ff70ab7c931d040f6fe81c0fa/classes.dex" />
     </item>
 
 </items>
