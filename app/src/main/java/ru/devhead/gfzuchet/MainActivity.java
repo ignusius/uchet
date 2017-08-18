@@ -84,7 +84,6 @@ public class MainActivity extends Activity {
             CreateDir("/GFZ/Template");
             CreateDir("/GFZ/Reports");
             CreateDir("/GFZ/DB");
-
             copyAssets();
 
             File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/test.db");
@@ -152,20 +151,22 @@ public class MainActivity extends Activity {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage("Вы уверенны, что хотитете создать новую базу данных?");
 
+
                             builder.setPositiveButton("Создать", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    db.close();
                                     // User clicked OK button
+                                    String makedb = new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
+                                            +".db";
                                     File src = new File(Environment.getExternalStorageDirectory() + "/GFZ/Template/template.db");
-                                    File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+
-                                            new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString()
-                                            +".db");
+                                    File dst = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+ makedb);
                                     try {
                                         copy(src,dst);
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                     SharedPreferences.Editor ed = sPref.edit();
-                                    ed.putString("DB", new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime()).toString() +".db");
+                                    ed.putString("DB", maked);
                                     ed.commit();
 
 
@@ -280,6 +281,7 @@ public class MainActivity extends Activity {
             arrReject = (ArrayList<String>) db.getTable().get(4);
         }
         catch (Exception e){
+            Log.d("======", String.valueOf(e));
             File file_template = new File(Environment.getExternalStorageDirectory() + "/GFZ/DB/"+cur_db);
             file_template.delete();
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -468,8 +470,9 @@ public class MainActivity extends Activity {
         @Override
     protected void onResume() {
         super.onResume();
-        SearcByText();
-        listView.setSelection(lastPoss);
+            db.close();
+            SearcByText();
+            listView.setSelection(lastPoss);
 
 
 

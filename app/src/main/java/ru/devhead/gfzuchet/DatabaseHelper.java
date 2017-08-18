@@ -116,7 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             query = "select rowid as _id, article, title, note, sum, reject from data where title like  ? or article like ? ";
         }
         else{
-            query = "select rowid as _id, article, title, note, sum, reject from data where (title like  ? or article like ? ) and sum > 0 ";
+            query = "select rowid as _id, article, title, note, sum, reject from data where (title like  ? or article like ? ) and sum != 0 ";
             }
         Log.d("++++++++", query);
 
@@ -163,7 +163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> reject = new ArrayList<String>();
 
 
-        query = "select rowid as _id, article, title, note, sum, reject from data where sum > 0 ";
+        query = "select rowid as _id, article, title, note, sum, reject from data where sum != 0 ";
         Log.d("++++++++", query);
 
         data = myDataBase.rawQuery(query, null);
